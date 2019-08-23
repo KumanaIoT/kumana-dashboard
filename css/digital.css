@@ -1,0 +1,20 @@
+.exampleContainer
+{
+    display: inline-block;
+    background-color: Black;
+    border-radius: 5px;
+    margin-left: 12px;
+}
+
+.resizableExample
+{
+    margin: 1em;
+    padding: 0.5em;
+    height: 120px;
+    width: 80px;
+}
+
+.resizableExample div:first-child
+{
+    height: 100%;
+}

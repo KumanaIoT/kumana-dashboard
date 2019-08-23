@@ -1,0 +1,74 @@
+@keyframes lds-radio {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes lds-radio {
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+.lds-radio {
+    position: relative;
+}
+.lds-radio div {
+    position: absolute;
+}
+.lds-radio div:nth-child(1) {
+    width: 44px;
+    height: 44px;
+    left: 34px;
+    top: 128px;
+    border-radius: 50%;
+    background: #e92;
+    -webkit-animation: lds-radio 1s linear infinite;
+    animation: lds-radio 1s linear infinite;
+}
+.lds-radio div:nth-child(2) {
+    width: 66px;
+    height: 66px;
+    left: 56px;
+    top: 84px;
+    border-radius: 0 66px 0 0;
+    border: 20px solid #ff765c;
+    background: none;
+    -webkit-animation: lds-radio 1s linear infinite;
+    animation: lds-radio 1s linear infinite;
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+    border-bottom: 0;
+    border-left: 0;
+}
+.lds-radio div:nth-child(3) {
+    width: 110px;
+    height: 110px;
+    left: 56px;
+    top: 40px;
+    border-radius: 0 110px 0 0;
+    border: 20px solid #ffb646;
+    background: none;
+    -webkit-animation: lds-radio 1s linear infinite;
+    animation: lds-radio 1s linear infinite;
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+    border-bottom: 0;
+    border-left: 0;
+}
+.lds-radio {
+    width: 53px !important;
+    height: 53px !important;
+    -webkit-transform: translate(-26.5px, -26.5px) scale(0.265) translate(26.5px, 26.5px);
+    transform: translate(-26.5px, -26.5px) scale(0.265) translate(26.5px, 26.5px);
+}

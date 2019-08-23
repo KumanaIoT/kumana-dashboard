@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Kumana IoT</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <META HTTP-EQUIV="Expires" CONTENT="-1">
+        <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-store" />
+
+        <!--Styles...-->
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link href="css/glow-water-level.css" rel="stylesheet" type="text/css">
+        <link href="css/w3.css" rel="stylesheet" type="text/css">
+        <link href="css/preloader.css" rel="stylesheet" type="text/css">
+        <link href="css/bootstrap-3.3.6.css" rel="stylesheet" type="text/css">
+        <link href="css/main.css" rel="stylesheet" type="text/css">
+        <link href="css/switch.css" rel="stylesheet" type="text/css">
+        <link href="css/battery-gauge.css" rel="stylesheet" type="text/css">
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+        <link href='css/snackbar.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href='css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+        <link href='css/signal.css' rel='stylesheet' type='text/css'>
+        <link href='css/skillBars.css' rel='stylesheet' type='text/css'>
+        <link href='css/fullscrncharts/notification.css' rel='stylesheet' type='text/css'>
+        <link href='css/digital.css' rel='stylesheet' type='text/css'>
+
+        <script src="js/jquery_3_2_1.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/keycloak.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+        <script type="text/javascript" src="js/properties.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+
+    <body onmousedown="return true;">
+        <nav class="navbar navbar-default" style=" background-color:#646965; top: 0;position: fixed; width: 100%; background-size:cover; z-index:5000 ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div style="margin-top: 3px;">
+                         <span style="font-family: monospace; font-size: 40px; color: white;">Kumana IOT</span>
+                    </div>
+                   
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul  class="nav navbar-nav" style="margin-top:6px;">
+                        <li>
+                            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-block btn-danger" style="margin-top: 10px; margin-left: 25px; width: 125px;">Control Panel</button>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right" style="z-index:6000; padding:10px;">
+                        <li style="float:right;">
+                            <i data-toggle="modal" data-target="#myModalUserName" class="fa fa-user" aria-hidden="true" style="font-size:18px;  margin-top:12px; color:#FFFFFF;float:right;">
+                                <span class="caret"></span>
+                            </i>
+                        </li>
+                        <li style=" margin-top:12px;float:right; margin-right:12px;">
+                            <p>
+                                <a id="dateTime" style=" font-size:15px; color:white;"> Last Updated : On 12/08/2017 10.53 AM </a>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="main" style="margin-top:0px;">
+            <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog" style="z-index:5001;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:rgb(37, 179, 143);">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 style="text-align:center;">PUMP CONTROLLER</h4>
+                        </div>
+                        <div  class="modal-body">
+                            <center>
+                                <div style="margin-bottom: 15px;">
+                                    <span id="spanCurrentMotorStatus">Current Pump Status : UNKNOWN</span>
+                                </div>
+                                <div   class="onoffswitch" style="text-align:center;">
+                                    <input data-toggle="collapse" data-target="#demo" onClick="pumpController(this);" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox"
+                                           id="myonoffswitch" >   
+                                           <label class="onoffswitch-label" for="myonoffswitch">
+                                        <span class="onoffswitch-inner"></span>
+                                        <span class="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                                <div id="switch"  class="onoffswitch" style="text-align:center;">
+                                </div>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- startUserName -->
+            <div id="myModalUserName" class="modal fade" role="dialog" style="z-index:5001;">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:rgb(37, 179, 143);">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <table style="width:50%" align="center">
+                                <tr align="center">
+                                    <td align="center">You Are Login As </td>
+                                    <td align="center">:</td>
+                                    <td align="center">
+                                        <p id="userName" style="font-size:14px;  margin-top:11px;color:rgb(255, 255, 255)"> </p>
+                                    </td>
+                                </tr>
+                                <tr align="center">
+                                    <td align="center">
+                                        Logout
+                                    </td>
+                                    <td align="center">:</td>
+                                    <td align="center">
+                                        <a href="#" data-toggle="tooltip" data-placement="right" onclick="keycloak.logout()" title="Logout">
+                                            <span class="glyphicon glyphicon-log-out" style="font-size:24px; margin-top:6px;  color:rgb(255, 255, 255); "></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="snackbar">
+                Water pump turned off !
+            </div>
+            <br>
+            <br>
+
+            <div class="container-fluid" style="margin-top:30px;">
+                <div class="row">
+                    <div class="col-lg-3  text-center">
+                        <div class="card" align="center" height="340px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black; height:33px;">
+                                <h6 class="pump" id="pumpStatusH" style="margin-bottom:5px;">
+                                    <span style="float:left; ">SYSTEM : </span>
+                                    <span id="System_state" style="float:left; font-size:11px;margin-bottom:2px; margin-top: -3px; margin-left:3px"></span>
+                                    <span id="pump_state" style="float:right; font-size:11px; margin-bottom:2px; margin-top: -3px; margin-left:3px" class="w3-red w3-tag w3-large">UNKNOWN</span>
+                                    <span style="float:right;">PUMP : </span>
+                                </h6>
+                            </header>
+                            <div id="pump-status"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3  text-center">
+                        <div class="card" align="center" style="height:340px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="waterFlowRate1">POND WATER LEVEL
+                                </h6>
+                            </header>
+
+                            <div>
+                                <div class="green" style="z-index:-200">
+                                    <div class="progress" style="z-index:-200">
+                                        <div class="inner" style="z-index:-200">
+                                            <div class="percent" style="z-index:-200; font-size:40px; ">
+                                                <span style="z-index:-200">4ft</span>
+                                            </div>
+                                            <div class="water" style="z-index:-200"></div>
+                                            <div class="glare" style="z-index:-200"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="preview-textfield3">
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3  text-center">
+                        <div class="card" align="center" style="height:340px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="systemCurrent">WATER FLOW RATE
+                                </h6>
+                            </header>
+                            <canvas id="radgauge1" style="margin:10px" height="auto">
+                            </canvas>
+                            <div id="preview-textfield6"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3  text-center">
+                        <div class="card " align="center" height="340px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="batteryH">SOLAR SYSTEM CURRENT / VOLTAGE
+                                </h6>
+                            </header>
+                            <table style="height:60%; width:100%">
+                                <tbody>
+                                    <tr style="text-align:center;  " align="center">
+                                        <td>
+                                            <canvas id="ampnvolt" align="center" style="margin:1px; width:270px;">A </canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="text-align:center;" align="center">
+                                        <td>
+                                            <span align="center" style="float:center; margin-bottom:5px;"> Predicted Pump Status:
+                                                <span id="predicted_pump_state" align="center" class="w3-tag w3-blue w3-large" style="float:center; margin-bottom:5px; text-shadow: 2px 2px black;">
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="container-fluid" style="margin:0">
+                <div class="row">
+                    <div class="col-lg-6  text-center">
+                        <div class="card" align="center" align="center" style="height:165px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="alert">ALERTS AND NOTIFICATIONS </h6>
+                            </header>
+<!--                            <div id="alertsAndNotificationTable" style="padding-left: 10px; height: 120px; overflow: auto;">
+                                No any alert to show...
+                            </div>-->
+                            <div style="height: auto; width: auto; overflow: auto; height: 120px; padding-left: 10px; padding-right: 10px;">
+                                <table id="alertAndNotificationTable" style="width: 100%;">
+<!--                                    <tr>
+                                        <th>Description</th><th>Severity</th><th>Time Reported</th><th>Last Updated</th>
+                                    </tr>                                    -->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+<!--                    <div class="col-lg-3  text-center">
+                        <div class="card" align="center" style="height:165px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="eventLog">GSM / SERVER CONNECTION</h6>
+                            </header>
+
+                            <table style=" background:url(images/tabbackground.png); background-size:cover; ">
+                                <tr align="center" width="100%">
+                                    <td width="50%" height="100%" align="center">
+                                        <div style="height:110px; border-radius:5px; padding:0px; margin:5px; border: 3px solid rgb(167, 167, 167)">
+                                            <i id="concerticon" class="fa" aria-hidden="true" style="font-size:67px; margin:5px; color:#6d0"></i>
+                                            <br>
+                                            <marquee align="center" style="font-size:160%; color:black; text-overflow: ellipsis; text-transform:uppercase;">SERVER CONNECTION</marquee>
+                                        </div>
+                                    </td>
+                                    <td width="50%" height="100%" align="center">
+                                        <div style="height:110px;  border-radius:5px; padding:0px; margin:5px;  border: 3px solid rgb(167, 167, 167);">
+                                            <i id="gsmicon" class="fa fa-signal" aria-hidden="true" style="font-size:67px; margin:5px; color:#6d0"></i>
+                                            <br>
+                                            <marquee align="center" style="font-size:160%; color:black; text-overflow: ellipsis; text-transform:uppercase;">GSM/GPRS
+                                                <br>
+                                            </marquee>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                        </div>
+                    </div>-->
+
+                    <div class="col-lg-3  text-center">
+                        <div class="card" align="center" style="height:165px">
+                            <header class="w3-container w3-blue">
+                                <h6 id="batteryH">
+                                    <span style="text-shadow: 2px 2px black;">BATTERY LEVEL</span>
+                                    <span style="float:right; font-size:20px; color:#ffffff;font-family:digital-clock-font; margin-top:-6px;" id="preview-textfield8">0%</span>
+                                </h6>
+                            </header>
+                            <center>
+                                <div id="div1" class="fa"></div>
+                            </center>
+                        </div>
+                    </div>
+                    <div class="col-lg-3  text-center">
+                        <div class="card" align="left" style="height:165px">
+                            <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                                <h6 id="eventLog">TEMPERATURE / HUMIDITY / LIGHT LEVEL</h6>
+                            </header>
+                            <br>
+                            <div class="scontainer" data-toggle="tooltip" data-placement="left" title="TEMPERATURE" style="  background:url(images/gloss.png) no-repeat; z-index:50px; border-radius: 12px; background-color:gray; ">
+                                <!-- Temperature -->
+                                <div id="temp-sensor" style=" border-radius: 9px;" class="skills temperature">0%</div>
+                            </div>
+                            <br>
+                            <div class="scontainer" data-toggle="tooltip" data-placement="left" title="HUMIDITY" style=" background:url(images/gloss.png) no-repeat; z-index:50px;  border-radius: 12px; background-color:gray; ">
+                                <!-- Humidity -->
+                                <div id="hum" style=" border-radius: 9px;" class="skills humidity">0%</div>
+                            </div>
+                            <br>
+                            <div class="scontainer" data-toggle="tooltip" data-placement="left" title="LIGHT LEVEL" style=" background:url(images/gloss.png) no-repeat; z-index:50px; border-radius: 12px; background-color:gray; ">
+                                <!-- Light Level -->
+                                <div id="lux-sensor" style=" border-radius: 9px;" class="skills lux">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin:auto">
+                <div class="col-lg-6 text-center">
+                    <div class="card" align="center" style="padding:0px;">
+                        <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <h6 id="lineChartOne">LIGHT LEVEL vs SYSTEM CURRENT </h6>
+                                    </td>
+                                    <td style="text-align: right">
+                                        Data Period : 
+                                        <select class="btn-warning" id="dataPeriodSelectLightLevelAndSystemCurrent" style="width: auto; margin-top: 1px;" onchange="dataPeriodChangedLightLevelAndSystemCurrent()">
+                                            <option value="1" selected>1 Day</option>
+                                            <option value="2">2 Days</option>
+                                            <option value="5">5 Days</option>
+                                            <option value="10">10 Days</option>
+                                            <option value="15">15 Days</option>
+                                            <option value="30">30 Days</option>                                            
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </header>
+                        <br>
+                        <div class="progressDiv" style="height: 20px; width: 75%; margin-left: auto; margin-right: auto; z-index: -1" class="show">
+                            <span>Loading graphs, Please wait...</span>
+                        </div>
+                        <span id="noDataLightLevelSystemCurrent" class="hidden">No data found for selected date range...</span>
+                        <div id="frvsrpm" style="width:100%; min-height: 350px; padding-left: 5px; padding-right: 10px; padding-bottom: 10px; z-index: 1"></div>
+                        <div id="preview-textfield3"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="card" align="center" style="padding:0px">
+                        <header class="w3-container w3-blue" style="text-shadow: 2px 2px black;">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <h6 id="lineChartTwo">WATER FLOW RATE vs SYSTEM CURRENT </h6>
+                                    </td>
+                                    <td style="text-align: right">
+                                        Data Period : 
+                                        <select class="btn-warning" id="dataPeriodSelectWaterFlowAndSystemCurrent" style="width: auto; margin-top: 1px;" onchange="dataPeriodChangedWaterFlowAndSystemCurrent()">
+                                            <option value="1" selected>1 Day</option>
+                                            <option value="2">2 Days</option>
+                                            <option value="5">5 Days</option>
+                                            <option value="10">10 Days</option>
+                                            <option value="15">15 Days</option>
+                                            <option value="30">30 Days</option>                                            
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </header>
+                        <br>
+                        <div class="progressDiv" style="height: 20px; width: 75%; margin-left: auto; margin-right: auto; z-index: -1" class="show">
+                            <span >Loading graphs, Please wait...</span>                            
+                        </div>
+                        <span id="noDataWaterFlowSystemCurrent" class="hidden">No data found for selected date range...</span>
+                        <div id="wfrsc" style="width:100%; min-height:  350px; padding-left: 5px; padding-right: 10px; padding-bottom: 10px; z-index: 1"></div>
+                        <div id="preview-textfield3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  Other stuff here-->
+            <div id="loading-wrapper" style="background-color:#222">
+                <div id="loading-text">KUMANA IoT</div>
+                <div id="loading-content"></div>
+            </div>
+
+            <div width="100%" class="w3-green" style="padding:20px;  background-size:cover; margin-top: 30px;">
+                <table width="100%">
+                    <tr>
+                        <td>
+                            <span style="float:left; "> © Copyrights by
+                                <a style="margin-left:5px" href="https://accelerite.com ">
+                                    <img src="images/acc.png" style="width:110px;  margin-bottom:1.6px;">
+                                </a>
+                                All Rights Reserved.
+                            </span>
+                        </td>
+                        <td>
+                            <span style="float:right;"> Powered by
+                                <a style="margin-left:5px" href="https://accelerite.com/products/concert">
+                                    <img src="images/concert.png" style="width:130px; ">
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!--Page related JS...-->               
+        <script type="text/javascript" src="js/service.js"></script> 
+        <script type="text/javascript" src="js/home.js"></script>
+
+        <!--Libraries for Chart and Dials-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript" src="js/gauge.min.js"></script>
+        <!--<script type="text/javascript" src="js/loader.js"></script>-->  
+
+        <!--For data charts-->
+        <script type="text/javascript" src="js/charts/chartOne.js"></script>  
+        <script type="text/javascript" src="js/charts/chartTwo.js"></script>
+        <script type="text/javascript" src="js/charts/solarStatWidget.min.js"></script>
+
+        <!--Custom JS For Dials and Charts...-->
+        <script type="text/javascript" src="js/components/water-level.js"></script>  
+        <script type="text/javascript" src="js/components/water-flow-rate.js"></script>
+        <script type="text/javascript" src="js/components/battery-gauge.js"></script>
+        <script type="text/javascript" src="js/components/temperature.js"></script>
+        <script type="text/javascript" src="js/components/humidity.js"></script>
+        <script type="text/javascript" src="js/components/pumpStatus.js"></script>
+        <script type="text/javascript" src="js/components/lightlevel.js"></script>  
+        <script type="text/javascript" src="js/components/systemcurrent.js"></script>
+        <script type="text/javascript" src="js/components/systemStatus.js"></script>
+        <script type="text/javascript" src="js/components/water_pump_state.js"></script>
+        <script type="text/javascript" src="js/components/predictedPumpStatus.js"></script>
+        <script type="text/javascript" src="js/components/connection.js"></script>
+        <script type="text/javascript" src="js/components/gsmCurrentStatus.js"></script>  
+        <script type="text/javascript" src="js/components/water_pump_button_state.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+        </script>
+
+    </body>
+
+</html>

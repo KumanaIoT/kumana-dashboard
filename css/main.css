@@ -1,0 +1,269 @@
+ 
+@viewport {
+    width: device-width;
+    height:device-width;
+
+}
+body ,html {
+    -moz-transform: scale(1.0); 
+
+    /*   zoom: .65;margin:5%;
+      background-image: url('../images/forest2.gif');
+    */
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    /*	 overflow:hidden; 
+    */
+    -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+
+
+
+    /*cursor: url(../images/pointer3.png), auto;*/
+}
+h6{
+    text-align:left; 
+    font-size:30px;
+}
+
+/*control panel css / time / username/logout*/
+ul {
+    list-style-type: none;
+    margin: 25px;
+    padding: 0;
+    overflow: hidden;
+
+
+}
+
+/* li {
+  float: left;
+} */
+
+li a {
+    display: block;
+    color: white;
+    text-align: right;
+    padding: auto;
+    text-decoration: none;
+}
+
+/* skillbar */
+/* .scontainer {
+  text-align: right;
+  padding-left: 0px;
+  
+  color: white;
+} */
+/* endskill */
+
+/*dropdwn*/
+/* .dropdown {
+  float: right;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+    
+  border: none;
+  outline: none;
+  color: rgb(237, 253, 6);
+  padding: 14px 16px;
+  background-color: inherit;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+} */
+/*dropdwn*/
+
+
+.parallax {
+    /* The image used */
+    /*   background-image: url('../images/background.jpg');
+    */
+    /* Set a specific height */
+    min-height: 1000px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 5px;
+} 
+
+
+
+.lastDate a:hover{
+    text-decoration: none;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    background-color:	rgba(129, 186, 243, 0.1);
+
+    border-radius: 0px 0px 20px 20px;
+    height:180%;
+    width:100%;
+    margin:5px
+}
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 20px 0 rgba(0,0,0,0.3);
+}
+/* Add some padding inside the card container */
+.cardcontainer {
+    padding: 2px 16px;
+    margin: auto; 
+
+
+}
+
+
+
+/* Add a black background color to the top navigation */
+
+.topnav {
+    overflow: hidden;
+    background-color: #3399ff;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav .icon {
+    display: none;
+}
+.main{
+    margin-top: 1%;
+
+}
+
+
+@media screen and (max-width: 600px) {
+    .topnav a:not(:first-child) {display: none;}
+    .topnav a.icon {
+        float: right;
+        display: block;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .topnav.responsive {position: relative;}
+    .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+}
+
+@font-face{
+    font-family:'digital-clock-font';
+    src: url('../fonts/digital-7.ttf');
+    font-size: 18px;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}

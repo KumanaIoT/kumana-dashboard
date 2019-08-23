@@ -1,0 +1,20 @@
+* {box-sizing: border-box}
+
+.scontainer {
+    width: 100%;
+    background-color: gray;
+
+}
+
+.skills {
+    text-align: right;
+    padding-right: 20px;
+    line-height: 20px;
+    color: white;
+
+
+}
+
+.humidity {width: 0%; background-color: #4CAF50;}
+.temperature {width: 0%; background-color: #F32121;}
+.lux {width: 0%; background-color: rgb(74, 194, 231);}
